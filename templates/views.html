@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!--JQuery & bootstrap-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+    <!--Google Font-->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,500,600,700,700i|Montserrat:300,400,500,600,700"
+          rel="stylesheet">
+    <!--DataTables-->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8"
+            src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var table = $('#tab').DataTable( {
+                scrollX:        true,
+                scrollCollapse: false,
+                paging:         false,
+                fixedColumns:   {
+                    leftColumns: 1,
+                }
+            } );
+        });
+
+    </script>
+    <style>
+        body,button, input, select, textarea,h1 ,h2, h3, h4, h5, h6 {
+            font-family: "Noto Sans TC", "Microsoft Yahei", "微軟雅黑", sans-serif;
+        }
+    </style>
+    <title>{{title}}</title>
+</head>
+<body>
+
+<div class="jumbotron jumbotron-fluid text-center">
+    <div class="container">
+        <h1>{{title}}</h1>
+        <p>部落格瀏覽次數統計</p>
+        <p>Since 2022/01/04</p>
+    </div>
+</div>
+<div class="container">
+    <!--Cards-->
+    <div class="row">
+        <div class="col">
+            <div class="card bg-primary text-white">
+                <div class="card-body">
+                    <h3 class="card-title">{{read['read']}} / {{read['all']}}</h3>
+                    <p class="card-text">已瀏覽頁面</p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card bg-success text-white">
+                <div class="card-body">
+                    <h3 class="card-title">{{views_sum}}</h3>
+                    <p class="card-text">總瀏覽次數</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Table-->
+    <div class="row">
+        <div class="col my-5">
+            <table id="tab" class="table table-hover table-striped stripe row-border order-column" cellspacing="3"
+                   width="100%">
+                <thead>
+                    <tr>
+                        {% for col_name in table['head'] %}
+                            <th>{{col_name}}</th>
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in table['data'] %}
+                    <tr>
+                        {% for item in row %}
+                            <td>{{item}}</td>
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>
